@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { DefaultLoginLayout } from '../../components/default-login-layout/default-login-layout';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { PrimaryInputComponent } from '../../components/primary-input/primary-input';
@@ -28,7 +28,7 @@ interface SignupForm {
 })
 export class SignupComponent {
   signupForm!: FormGroup<SignupForm>;
-
+  
   constructor(
     private router: Router,
     private loginService: LoginService,
@@ -43,13 +43,13 @@ export class SignupComponent {
   }
 
   submit(){
-    this.loginService.login(this.signupForm.value.email, this.signupForm.value.password).subscribe({
+    this.loginService.signup(this.signupForm.value.name, this.signupForm.value.email, this.signupForm.value.password).subscribe({
       next: () => this.toastService.success("Cadastro feito com sucesso!"),
       error: () => this.toastService.error("Erro inesperado! Tente novamente mais tarde")
     })
   }
 
   navigate(){
-    this.router.navigate(["login"])
+    this.router.navigate(['login'])
   }
 }
