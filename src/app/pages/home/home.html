@@ -1,0 +1,16 @@
+<app-default-login-layout 
+    title="Bem-vindo à Geek Store! Faça login para iniciar suas compras" 
+    primaryBtnText="Fazer Login"
+    secondaryBtnText="Criar Conta"
+    (submit)="navigateToLogin()"
+    (navigate)="navigateToSignup()"
+    [disablePrimaryBtn]="false"
+>
+    <div class="welcome-content">
+        <p class="welcome-message">
+            Explore nossa coleção completa de Funkos Geek e produtos colecionáveis.
+            Faça login ou crie uma conta para começar a comprar!
+        </p>
+    </div>
+</app-default-login-layout>
+
