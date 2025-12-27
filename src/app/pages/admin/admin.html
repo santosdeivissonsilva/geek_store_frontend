@@ -1,0 +1,166 @@
+<app-default-homepage
+    user="Conta"
+    cart="Carrinho"
+    (navigateToUserPage)="navigateToUserPage()"
+    (navigateToProductsPage)="navigateToProductsPage()"
+    (navigateToCartPage)="navigateToCartPage()"
+>
+    <div class="admin-page">
+        <div class="page-header">
+            <h1 class="page-title">Painel Administrativo</h1>
+            <p class="page-subtitle">Gerencie os produtos da loja</p>
+        </div>
+
+        <div class="admin-actions">
+            <button class="btn-secondary" (click)="navigateToUsersManagement()">
+                👥 Gerenciar Usuários
+            </button>
+            <button class="btn-secondary" (click)="navigateToSalesManagement()">
+                💰 Registro de Vendas
+            </button>
+            <button class="btn-primary" (click)="openCreateForm()" [disabled]="showForm">
+                + Adicionar Novo Produto
+            </button>
+        </div>
+
+        @if (showForm) {
+            <div class="product-form-container">
+                <h2 class="form-title">{{ editingProduct ? 'Editar Produto' : 'Cadastrar Novo Produto' }}</h2>
+                <form [formGroup]="productForm" class="product-form">
+                    <app-primary-input
+                        formControlName="name"
+                        inputName="name"
+                        type="text"
+                        label="Nome do Produto"
+                        placeholder="Ex: Funko Pop Batman"
+                    >
+                    </app-primary-input>
+
+                    <app-primary-input
+                        formControlName="description"
+                        inputName="description"
+                        type="text"
+                        label="Descrição"
+                        placeholder="Descreva o produto..."
+                    >
+                    </app-primary-input>
+
+                    <app-primary-input
+                        formControlName="price"
+                        inputName="price"
+                        type="text"
+                        label="Preço (R$)"
+                        placeholder="Ex: 99.90"
+                    >
+                    </app-primary-input>
+
+                    <div class="form-group">
+                        <label for="image" class="form-label">Imagem do Produto</label>
+                        <input
+                            type="file"
+                            id="image"
+                            name="image"
+                            accept="image/*"
+                            (change)="onImageSelected($event)"
+                            class="file-input"
+                        />
+                        @if (imagePreview) {
+                            <div class="image-preview">
+                                <img [src]="imagePreview" alt="Preview da imagem" />
+                            </div>
+                        }
+                        @if (productForm.get('image')?.invalid && productForm.get('image')?.touched) {
+                            <span class="error-message">Por favor, selecione uma imagem</span>
+                        }
+                    </div>
+
+                    <app-primary-input
+                        formControlName="category"
+                        inputName="category"
+                        type="text"
+                        label="Categoria"
+                        placeholder="Ex: Funko Pop, Action Figure, etc."
+                    >
+                    </app-primary-input>
+
+                    <app-primary-input
+                        formControlName="quantity"
+                        inputName="quantity"
+                        type="number"
+                        label="Quantidade em Estoque"
+                        placeholder="Ex: 10"
+                    >
+                    </app-primary-input>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn-secondary" (click)="cancelForm()">
+                            Cancelar
+                        </button>
+                        <button type="button" class="btn-primary" (click)="submitForm()" [disabled]="!productForm.valid">
+                            {{ editingProduct ? 'Atualizar' : 'Cadastrar' }}
+                        </button>
+                    </div>
+                </form>
+            </div>
+        }
+
+        @if (loading) {
+            <div class="loading-container">
+                <p>Carregando produtos...</p>
+            </div>
+        }
+
+        @if (!loading) {
+            <div class="products-container">
+                @if (products.length === 0) {
+                    <div class="no-products">
+                        <p>Nenhum produto cadastrado no momento.</p>
+                    </div>
+                }
+
+                @if (products.length > 0) {
+                    <div class="products-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Imagem</th>
+                                    <th>Nome</th>
+                                    <th>Categoria</th>
+                                    <th>Preço</th>
+                                    <th>Quantidade</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for (product of products; track product.id) {
+                                    <tr>
+                                        <td class="image-cell">
+                                            <img [src]="getImageUrl(product.image)" [alt]="product.name" 
+                                                 (error)="$event.target.src='/assets/no-image.png'" />
+                                        </td>
+                                        <td class="name-cell">
+                                            <strong>{{ product.name }}</strong>
+                                            <p class="description">{{ product.description }}</p>
+                                        </td>
+                                        <td>{{ product.category }}</td>
+                                        <td>{{ formatPrice(product.price) }}</td>
+                                        <td>{{ product.quantity || 0 }}</td>
+                                        <td class="actions-cell">
+                                            <button class="btn-edit" (click)="openEditForm(product)">
+                                                Editar
+                                            </button>
+                                            <button class="btn-delete" (click)="deleteProduct(product)">
+                                                Excluir
+                                            </button>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</app-default-homepage>
+
