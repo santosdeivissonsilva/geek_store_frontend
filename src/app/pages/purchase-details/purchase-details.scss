@@ -1,0 +1,280 @@
+@import "../../../styles/variables.scss";
+
+.purchase-details-page {
+    padding: 40px 24px 60px;
+    max-width: 1400px;
+    margin: 0 auto;
+    background-color: $background-color;
+    min-height: calc(100vh - 80px);
+}
+
+.page-header {
+    margin-bottom: 32px;
+
+    .btn-back {
+        padding: 8px 16px;
+        background-color: white;
+        color: $primary-color;
+        border: 2px solid $primary-color;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-bottom: 16px;
+
+        &:hover {
+            background-color: $backgroung-secondary-gray;
+        }
+    }
+
+    .page-title {
+        font-size: 36px;
+        font-weight: bold;
+        color: $primary-color;
+        margin: 0;
+    }
+}
+
+.loading-container {
+    text-align: center;
+    padding: 60px 24px;
+    color: $text-color;
+    font-size: 18px;
+}
+
+.no-purchase {
+    text-align: center;
+    padding: 60px 24px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+
+    p {
+        font-size: 18px;
+        color: $text-color;
+        margin-bottom: 24px;
+    }
+
+    .btn-primary {
+        padding: 12px 24px;
+        background-color: $primary-color;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+            background-color: #6B0000;
+        }
+    }
+}
+
+.purchase-details-container {
+    .purchase-card {
+        background-color: white;
+        border-radius: 8px;
+        padding: 32px;
+        box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+
+        .purchase-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 24px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid $backgroung-gray;
+
+            .purchase-info {
+                h2 {
+                    font-size: 24px;
+                    font-weight: bold;
+                    color: $primary-color;
+                    margin: 0 0 8px 0;
+                }
+
+                .purchase-date {
+                    font-size: 14px;
+                    color: $text-color;
+                    opacity: 0.7;
+                    margin: 0;
+                }
+            }
+
+            .purchase-total {
+                text-align: right;
+
+                .total-label {
+                    display: block;
+                    font-size: 14px;
+                    color: $text-color;
+                    opacity: 0.7;
+                    margin-bottom: 8px;
+                }
+
+                .total-value {
+                    display: block;
+                    font-size: 32px;
+                    font-weight: bold;
+                    color: $primary-color;
+                }
+            }
+        }
+
+        .purchase-details {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+
+            .customer-info {
+                p {
+                    margin: 4px 0;
+                    font-size: 14px;
+                    color: $text-color;
+
+                    strong {
+                        color: $primary-color;
+                    }
+                }
+            }
+
+            .purchase-status {
+                .badge-success,
+                .badge-warning,
+                .badge-danger,
+                .badge-default {
+                    display: inline-block;
+                    padding: 6px 14px;
+                    border-radius: 12px;
+                    font-size: 12px;
+                    font-weight: 600;
+                    text-transform: uppercase;
+                }
+
+                .badge-success {
+                    background-color: #28a745;
+                    color: white;
+                }
+
+                .badge-warning {
+                    background-color: #ffc107;
+                    color: #212529;
+                }
+
+                .badge-danger {
+                    background-color: #dc3545;
+                    color: white;
+                }
+
+                .badge-default {
+                    background-color: $backgroung-gray;
+                    color: $text-color;
+                }
+            }
+        }
+
+        .purchase-items {
+            margin-bottom: 24px;
+
+            h3 {
+                font-size: 18px;
+                font-weight: 600;
+                color: $text-color;
+                margin: 0 0 16px 0;
+            }
+
+            .items-table {
+                width: 100%;
+                border-collapse: collapse;
+
+                thead {
+                    background-color: $backgroung-gray;
+
+                    th {
+                        padding: 12px;
+                        text-align: left;
+                        font-weight: 600;
+                        font-size: 12px;
+                        text-transform: uppercase;
+                        color: $text-color;
+                    }
+                }
+
+                tbody {
+                    tr {
+                        border-bottom: 1px solid $backgroung-gray;
+
+                        &:last-child {
+                            border-bottom: none;
+                        }
+
+                        td {
+                            padding: 12px;
+                            font-size: 14px;
+                            color: $text-color;
+                        }
+                    }
+                }
+            }
+        }
+
+        .purchase-actions {
+            display: flex;
+            justify-content: flex-end;
+            padding-top: 24px;
+            border-top: 2px solid $backgroung-gray;
+
+            .btn-delete {
+                padding: 12px 24px;
+                background-color: #dc3545;
+                color: white;
+                border: none;
+                border-radius: 8px;
+                font-size: 16px;
+                font-weight: 500;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+
+                &:hover {
+                    background-color: #c82333;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .purchase-details-page {
+        padding: 24px 16px 40px;
+    }
+
+    .page-header {
+        .page-title {
+            font-size: 28px;
+        }
+    }
+
+    .purchase-card {
+        padding: 24px;
+
+        .purchase-header {
+            flex-direction: column;
+            gap: 16px;
+
+            .purchase-total {
+                text-align: left;
+            }
+        }
+
+        .purchase-details {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 12px;
+        }
+    }
+}
+

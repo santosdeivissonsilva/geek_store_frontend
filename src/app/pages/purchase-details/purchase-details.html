@@ -1,0 +1,98 @@
+<app-default-homepage
+    user="Conta"
+    cart="Carrinho"
+    (navigateToUserPage)="navigateToUserPage()"
+    (navigateToProductsPage)="navigateToProductsPage()"
+    (navigateToCartPage)="navigateToCartPage()"
+>
+    <div class="purchase-details-page">
+        <div class="page-header">
+            <button class="btn-back" (click)="navigateBack()">
+                ← Voltar
+            </button>
+            <h1 class="page-title">{{ isAdmin ? 'Detalhes da Venda' : 'Detalhes da Compra' }}</h1>
+        </div>
+
+        @if (loading) {
+            <div class="loading-container">
+                <p>Carregando detalhes...</p>
+            </div>
+        }
+
+        @if (!loading && purchase) {
+            <div class="purchase-details-container">
+                <div class="purchase-card">
+                    <div class="purchase-header">
+                        <div class="purchase-info">
+                            <h2>{{ isAdmin ? 'Venda' : 'Compra' }} #{{ purchase.id.substring(0, 8) }}</h2>
+                            <p class="purchase-date">{{ formatDate(purchase.date) }}</p>
+                        </div>
+                        <div class="purchase-total">
+                            <span class="total-label">Total:</span>
+                            <span class="total-value">{{ formatPrice(purchase.total) }}</span>
+                        </div>
+                    </div>
+                    
+                    <div class="purchase-details">
+                        @if (isAdmin) {
+                            <div class="customer-info">
+                                <p><strong>Cliente:</strong> {{ purchase.userName }}</p>
+                                <p><strong>Email:</strong> {{ purchase.userEmail }}</p>
+                            </div>
+                        }
+                        
+                        @if (purchase.status) {
+                            <div class="purchase-status">
+                                <span [class]="getStatusBadgeClass(purchase.status)">
+                                    {{ purchase.status }}
+                                </span>
+                            </div>
+                        }
+                    </div>
+
+                    <div class="purchase-items">
+                        <h3>Itens da {{ isAdmin ? 'Venda' : 'Compra' }}:</h3>
+                        <table class="items-table">
+                            <thead>
+                                <tr>
+                                    <th>Produto</th>
+                                    <th>Quantidade</th>
+                                    <th>Preço Unit.</th>
+                                    <th>Subtotal</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for (item of purchase.items; track $index) {
+                                    <tr>
+                                        <td>{{ item.productName }}</td>
+                                        <td>{{ item.quantity }}</td>
+                                        <td>{{ formatPrice(getItemPrice(item)) }}</td>
+                                        <td>{{ formatPrice(calculateSubtotal(item)) }}</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                    @if (isAdmin) {
+                        <div class="purchase-actions">
+                            <button class="btn-delete" (click)="deleteSale()">
+                                Excluir Venda
+                            </button>
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+
+        @if (!loading && !purchase) {
+            <div class="no-purchase">
+                <p>Compra não encontrada.</p>
+                <button class="btn-primary" (click)="navigateBack()">
+                    Voltar
+                </button>
+            </div>
+        }
+    </div>
+</app-default-homepage>
+
