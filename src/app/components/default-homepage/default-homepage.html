@@ -1,0 +1,36 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <img class="logo" src="logo.svg" alt="Geek Store Logo" />
+        </div>
+        <div class="navbar-search">
+            <input type="text" class="search-input" placeholder="Buscar produtos..." />
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+            <button class="btn-user" src="user.svg" (click)="navigateToUserPage()">{{ user }}</button>
+            <button class="btn-cart" src="cart.svg" (click)="navigateToCartPage()">{{ cart }}</button>
+        </ul>
+    </div>
+</nav>
+<ng-content></ng-content>
+<main class="homepage-main">
+    <footer class="homepage-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Sobre Nós</h4>
+                <p>Geek Store - Sua loja especializada em produtos geek e colecionáveis</p>
+            </div>
+            <div class="footer-section">
+                <h4>Redes Sociais</h4>
+                <div class="social-links">
+                    <p>Instagram</p>
+                    <p>Facebook</p>
+                    <p>Twitter</p>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Geek Store. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+</main>
