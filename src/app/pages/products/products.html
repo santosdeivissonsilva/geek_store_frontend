@@ -1,0 +1,77 @@
+<app-default-homepage
+    user="Conta"
+    cart="Carrinho"
+    (navigateToUserPage)="navigateToUserPage()"
+    (navigateToProductsPage)="navigateToProductsPage()"
+    (navigateToCartPage)="navigateToCartPage()"
+>
+    <div class="products-page">
+        <div class="page-header">
+            <h1 class="page-title">Nossos Produtos</h1>
+            <p class="page-subtitle">Explore nossa coleção completa de Funkos Geek e produtos colecionáveis</p>
+        </div>
+
+        <div class="category-filter">
+            <button 
+                class="filter-btn" 
+                [class.active]="selectedCategory === 'all'"
+                (click)="filterByCategory('all')">
+                Todos
+            </button>
+            @for (category of uniqueCategories; track category) {
+                <button 
+                    class="filter-btn"
+                    [class.active]="selectedCategory === category.toLowerCase()"
+                    (click)="filterByCategory(category.toLowerCase())">
+                    {{ category }}
+                </button>
+            }
+        </div>
+
+        @if (loading) {
+            <div class="loading-container">
+                <p>Carregando produtos...</p>
+            </div>
+        }
+
+        @if (!loading) {
+            <div class="products-container">
+                @if (products.length === 0) {
+                    <div class="no-products">
+                        <p>Nenhum produto cadastrado no momento.</p>
+                    </div>
+                }
+
+                @if (products.length > 0 && filteredProducts.length === 0) {
+                    <div class="no-products">
+                        <p>Nenhum produto encontrado nesta categoria.</p>
+                    </div>
+                }
+                
+                @if (filteredProducts.length > 0) {
+                    <div class="products-grid">
+                        @for (product of filteredProducts; track product.id || product) {
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <img [src]="getImageUrl(product.image)" [alt]="product.name" 
+                                         (error)="$event.target.src='/assets/no-image.png'" />
+                                </div>
+                                <div class="product-info">
+                                    <span class="product-category">{{ product.category }}</span>
+                                    <h3 class="product-name">{{ product.name }}</h3>
+                                    <p class="product-description">{{ product.description }}</p>
+                                    <div class="product-footer">
+                                        <p class="product-price">{{ formatPrice(product.price) }}</p>
+                                        <button class="btn-primary product-btn" (click)="addToCart(product)">
+                                            Adicionar ao Carrinho
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</app-default-homepage>
