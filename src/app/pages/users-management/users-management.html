@@ -1,0 +1,133 @@
+<app-default-homepage
+    user="Conta"
+    cart="Carrinho"
+    (navigateToUserPage)="navigateToUserPage()"
+    (navigateToProductsPage)="navigateToProductsPage()"
+    (navigateToCartPage)="navigateToCartPage()"
+>
+    <div class="users-management-page">
+        <div class="page-header">
+            <h1 class="page-title">Controle de Usuários</h1>
+            <p class="page-subtitle">Gerencie os usuários da plataforma</p>
+        </div>
+
+        <div class="admin-actions">
+            <button class="btn-secondary" (click)="navigateToAdminPage()">
+                ← Voltar para Painel Admin
+            </button>
+            <button class="btn-primary" (click)="openCreateForm()" [disabled]="showForm">
+                + Adicionar Novo Usuário
+            </button>
+        </div>
+
+        @if (showForm) {
+            <div class="user-form-container">
+                <h2 class="form-title">{{ editingUser ? 'Editar Usuário' : 'Cadastrar Novo Usuário' }}</h2>
+                <form [formGroup]="userForm" class="user-form">
+                    <app-primary-input
+                        formControlName="name"
+                        inputName="name"
+                        type="text"
+                        label="Nome"
+                        placeholder="Nome completo"
+                    >
+                    </app-primary-input>
+
+                    <app-primary-input
+                        formControlName="email"
+                        inputName="email"
+                        type="email"
+                        label="Email"
+                        placeholder="email@exemplo.com"
+                    >
+                    </app-primary-input>
+
+                    <app-primary-input
+                        formControlName="password"
+                        inputName="password"
+                        type="password"
+                        [label]="editingUser ? 'Nova Senha (opcional)' : 'Senha'"
+                        [placeholder]="editingUser ? 'Deixe em branco para manter a senha atual' : 'Mínimo 6 caracteres'"
+                    >
+                    </app-primary-input>
+
+                    <div class="form-group">
+                        <label for="role" class="form-label">Role</label>
+                        <select
+                            id="role"
+                            formControlName="role"
+                            class="form-select"
+                        >
+                            <option value="USER">USER</option>
+                            <option value="ADMIN">ADMIN</option>
+                        </select>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn-secondary" (click)="cancelForm()">
+                            Cancelar
+                        </button>
+                        <button type="button" class="btn-primary" (click)="submitForm()" [disabled]="!userForm.valid">
+                            {{ editingUser ? 'Atualizar' : 'Cadastrar' }}
+                        </button>
+                    </div>
+                </form>
+            </div>
+        }
+
+        @if (loading) {
+            <div class="loading-container">
+                <p>Carregando usuários...</p>
+            </div>
+        }
+
+        @if (!loading) {
+            <div class="users-container">
+                @if (users.length === 0) {
+                    <div class="no-users">
+                        <p>Nenhum usuário cadastrado no momento.</p>
+                    </div>
+                }
+
+                @if (users.length > 0) {
+                    <div class="users-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Email</th>
+                                    <th>Role</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for (user of users; track user.id) {
+                                    <tr>
+                                        <td class="name-cell">
+                                            <strong>{{ user.name }}</strong>
+                                        </td>
+                                        <td>{{ user.email }}</td>
+                                        <td>
+                                            <span [class]="getRoleBadgeClass(user.role)">
+                                                {{ user.role || 'USER' }}
+                                            </span>
+                                        </td>
+                                        <td class="actions-cell">
+                                            <button class="btn-edit" (click)="openEditForm(user)">
+                                                Editar
+                                            </button>
+                                            <button class="btn-delete" (click)="deleteUser(user)">
+                                                Excluir
+                                            </button>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</app-default-homepage>
+

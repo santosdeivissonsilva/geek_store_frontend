@@ -1,0 +1,330 @@
+@import "../../../styles/variables.scss";
+
+.users-management-page {
+    padding: 40px 24px 60px;
+    max-width: 1400px;
+    margin: 0 auto;
+    background-color: $background-color;
+    min-height: calc(100vh - 80px);
+}
+
+.page-header {
+    text-align: center;
+    margin-bottom: 40px;
+
+    .page-title {
+        font-size: 36px;
+        font-weight: bold;
+        color: $primary-color;
+        margin-bottom: 12px;
+    }
+
+    .page-subtitle {
+        font-size: 18px;
+        color: $text-color;
+        margin: 0;
+    }
+}
+
+.admin-actions {
+    margin-bottom: 32px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 16px;
+
+    .btn-primary {
+        padding: 12px 24px;
+        background-color: $primary-color;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+
+        &:hover:not(:disabled) {
+            background-color: #6B0000;
+        }
+
+        &:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+    }
+
+    .btn-secondary {
+        padding: 12px 24px;
+        background-color: white;
+        color: $primary-color;
+        border: 2px solid $primary-color;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+
+        &:hover {
+            background-color: $backgroung-secondary-gray;
+        }
+    }
+}
+
+.user-form-container {
+    background-color: white;
+    border-radius: 8px;
+    padding: 32px;
+    margin-bottom: 32px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+
+    .form-title {
+        font-size: 24px;
+        font-weight: bold;
+        color: $primary-color;
+        margin-bottom: 24px;
+    }
+
+    .user-form {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+
+        .form-label {
+            font-size: 14px;
+            font-weight: 500;
+            color: $text-color;
+            margin-bottom: 4px;
+        }
+
+        .form-select {
+            padding: 12px;
+            border: 2px solid $backgroung-gray;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: border-color 0.3s ease;
+            background-color: white;
+
+            &:hover {
+                border-color: $primary-color;
+            }
+
+            &:focus {
+                outline: none;
+                border-color: $primary-color;
+            }
+        }
+    }
+
+    .form-actions {
+        display: flex;
+        gap: 16px;
+        justify-content: flex-end;
+        margin-top: 16px;
+
+        button {
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+
+            &.btn-primary {
+                background-color: $primary-color;
+                color: white;
+
+                &:hover:not(:disabled) {
+                    background-color: #6B0000;
+                }
+
+                &:disabled {
+                    opacity: 0.6;
+                    cursor: not-allowed;
+                }
+            }
+
+            &.btn-secondary {
+                background-color: white;
+                color: $primary-color;
+                border: 2px solid $primary-color;
+
+                &:hover {
+                    background-color: $backgroung-secondary-gray;
+                }
+            }
+        }
+    }
+}
+
+.loading-container {
+    text-align: center;
+    padding: 60px 24px;
+    color: $text-color;
+    font-size: 18px;
+}
+
+.no-users {
+    text-align: center;
+    padding: 60px 24px;
+    color: $text-color;
+    font-size: 18px;
+    background-color: white;
+    border-radius: 8px;
+}
+
+.users-container {
+    .users-table {
+        background-color: white;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+
+            thead {
+                background-color: $primary-color;
+                color: white;
+
+                th {
+                    padding: 16px;
+                    text-align: left;
+                    font-weight: 600;
+                    font-size: 14px;
+                    text-transform: uppercase;
+                    letter-spacing: 0.5px;
+                }
+            }
+
+            tbody {
+                tr {
+                    border-bottom: 1px solid $backgroung-gray;
+
+                    &:hover {
+                        background-color: $backgroung-secondary-gray;
+                    }
+
+                    &:last-child {
+                        border-bottom: none;
+                    }
+
+                    td {
+                        padding: 16px;
+                        vertical-align: middle;
+                    }
+                }
+            }
+        }
+
+        .name-cell {
+            max-width: 300px;
+
+            strong {
+                display: block;
+                font-size: 16px;
+                color: $text-color;
+            }
+        }
+
+        .badge-admin {
+            display: inline-block;
+            padding: 4px 12px;
+            background-color: $primary-color;
+            color: white;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .badge-user {
+            display: inline-block;
+            padding: 4px 12px;
+            background-color: $backgroung-gray;
+            color: $text-color;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .actions-cell {
+            white-space: nowrap;
+
+            button {
+                padding: 8px 16px;
+                border-radius: 6px;
+                font-size: 14px;
+                font-weight: 500;
+                cursor: pointer;
+                border: none;
+                margin-right: 8px;
+                transition: all 0.3s ease;
+
+                &.btn-edit {
+                    background-color: $secundary-color;
+                    color: white;
+
+                    &:hover {
+                        background-color: #C0442E;
+                    }
+                }
+
+                &.btn-delete {
+                    background-color: #dc3545;
+                    color: white;
+
+                    &:hover {
+                        background-color: #c82333;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .users-management-page {
+        padding: 24px 16px 40px;
+    }
+
+    .page-header {
+        margin-bottom: 32px;
+
+        .page-title {
+            font-size: 28px;
+        }
+
+        .page-subtitle {
+            font-size: 16px;
+        }
+    }
+
+    .user-form-container {
+        padding: 24px;
+
+        .form-title {
+            font-size: 20px;
+        }
+    }
+
+    .users-container {
+        .users-table {
+            overflow-x: auto;
+
+            table {
+                min-width: 600px;
+            }
+        }
+    }
+}
+
