@@ -1,1 +1,96 @@
-<p>Usuário autenticado!</p>
+<main class="user-page">
+    <section class="main-section">
+        <img class="logo" src="/logo.svg" alt="Geek Store Logo" />
+        <h1>Minha Conta</h1>
+        
+        <div class="user-info-section">
+            <div class="info-header">
+                <h2>Informações Pessoais</h2>
+                <button class="btn-edit" (click)="toggleEditMode()">
+                    {{ isEditMode ? 'Cancelar' : 'Editar' }}
+                </button>
+            </div>
+
+            <form [formGroup]="userForm" class="user-form">
+                <app-primary-input 
+                    formControlName="name"
+                    inputName="name" 
+                    type="text" 
+                    label="Nome" 
+                    placeholder="Seu nome completo">
+                    <img src="email-icon.svg"/>
+                </app-primary-input>
+
+                <app-primary-input 
+                    formControlName="email"
+                    inputName="email" 
+                    type="email" 
+                    label="Email" 
+                    placeholder="seu@email.com">
+                    <img src="email-icon.svg"/>
+                </app-primary-input>
+
+                @if (isEditMode) {
+                <div class="password-section">
+                    <h3>Alterar Senha</h3>
+                    <app-primary-input 
+                        formControlName="currentPassword"
+                        inputName="currentPassword" 
+                        type="password" 
+                        label="Senha Atual" 
+                        placeholder="Digite sua senha atual">
+                        <img src="password-icon.svg"/>
+                    </app-primary-input>
+
+                    <app-primary-input 
+                        formControlName="newPassword"
+                        inputName="newPassword" 
+                        type="password" 
+                        label="Nova Senha" 
+                        placeholder="Digite sua nova senha">
+                        <img src="password-icon.svg"/>
+                    </app-primary-input>
+
+                    <app-primary-input 
+                        formControlName="confirmPassword"
+                        inputName="confirmPassword" 
+                        type="password" 
+                        label="Confirmar Nova Senha" 
+                        placeholder="Confirme sua nova senha">
+                        <img src="password-icon.svg"/>
+                    </app-primary-input>
+                </div>
+                }
+            </form>
+
+            @if (isEditMode) {
+            <div class="btn-wrapper">
+                <button 
+                    class="btn-primary" 
+                    (click)="saveChanges()" 
+                    [disabled]="!userForm.valid || isSaving">
+                    {{ isSaving ? 'Salvando...' : 'Salvar Alterações' }}
+                </button>
+            </div>
+            }
+        </div>
+
+        <div class="navigation-actions">
+            <button class="btn-navigation" (click)="navigateToProducts()">
+                ← Voltar para Produtos
+            </button>
+            <button class="btn-navigation btn-cart" (click)="navigateToCart()">
+                🛒 Carrinho
+            </button>
+            <button class="btn-navigation btn-purchases" (click)="navigateToPurchases()">
+                📦 Minhas Compras
+            </button>
+        </div>
+
+        <div class="account-actions">
+            <button class="btn-secondary" (click)="logout()">
+                Sair da Conta
+            </button>
+        </div>
+    </section>
+</main>

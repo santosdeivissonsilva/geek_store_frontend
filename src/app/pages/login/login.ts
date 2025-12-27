@@ -39,9 +39,42 @@ export class LoginComponent {
   }
 
   submit(){
-    this.loginService.login(this.loginForm.value.email, this.loginForm.value.password).subscribe({
-      next: () => this.toastService.success("Login feito com sucesso!"),
-      error: () => this.toastService.error("Erro inesperado! Tente novamente mais tarde")
+    const email = this.loginForm.value.email;
+    this.loginService.login(email, this.loginForm.value.password).subscribe({
+      next: () => {
+        // Salva o email usado no login
+        if (email) {
+          sessionStorage.setItem('email', email);
+        }
+        this.toastService.success("Login feito com sucesso!");
+        this.router.navigate(['/products']);
+      },
+      error: (error) => {
+        let errorMessage = "Erro inesperado! Tente novamente mais tarde";
+        
+        if (error.status === 401 || error.status === 403) {
+          // Verifica se a mensagem de erro indica senha incorreta
+          const errorText = error.error?.message || error.message || '';
+          const errorTextLower = errorText.toLowerCase();
+          
+          if (errorTextLower.includes('senha') || errorTextLower.includes('password') || 
+              errorTextLower.includes('credenciais') || errorTextLower.includes('credentials') ||
+              errorTextLower.includes('incorret') || errorTextLower.includes('invalid')) {
+            errorMessage = "Senha incorreta. Verifique suas credenciais e tente novamente.";
+          } else if (errorTextLower.includes('usuário') || errorTextLower.includes('user') ||
+                     errorTextLower.includes('não encontrado') || errorTextLower.includes('not found')) {
+            errorMessage = "Usuário não encontrado. Verifique seu email e tente novamente.";
+          } else {
+            errorMessage = "Email ou senha incorretos. Verifique suas credenciais e tente novamente.";
+          }
+        } else if (error.status === 404) {
+          errorMessage = "Usuário não encontrado. Verifique seu email e tente novamente.";
+        } else if (error.status === 0 || error.status >= 500) {
+          errorMessage = "Erro no servidor. Tente novamente mais tarde.";
+        }
+        
+        this.toastService.error(errorMessage);
+      }
     })
   }
 

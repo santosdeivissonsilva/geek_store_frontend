@@ -43,8 +43,15 @@ export class SignupComponent {
   }
 
   submit(){
-    this.loginService.signup(this.signupForm.value.name, this.signupForm.value.email, this.signupForm.value.password).subscribe({
-      next: () => this.toastService.success("Cadastro feito com sucesso!"),
+    const email = this.signupForm.value.email;
+    this.loginService.signup(this.signupForm.value.name, email, this.signupForm.value.password).subscribe({
+      next: () => {
+        if (email) {
+          sessionStorage.setItem('email', email);
+        }
+        this.toastService.success("Cadastro feito com sucesso!");
+        this.router.navigate(['/products']);
+      },
       error: () => this.toastService.error("Erro inesperado! Tente novamente mais tarde")
     })
   }
