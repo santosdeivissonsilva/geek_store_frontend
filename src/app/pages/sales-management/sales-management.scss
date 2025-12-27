@@ -1,0 +1,626 @@
+@import "../../../styles/variables.scss";
+
+.sales-management-page {
+    padding: 40px 24px 60px;
+    max-width: 1400px;
+    margin: 0 auto;
+    background-color: $background-color;
+    min-height: calc(100vh - 80px);
+}
+
+.page-header {
+    text-align: center;
+    margin-bottom: 40px;
+
+    .page-title {
+        font-size: 36px;
+        font-weight: bold;
+        color: $primary-color;
+        margin-bottom: 12px;
+    }
+
+    .page-subtitle {
+        font-size: 18px;
+        color: $text-color;
+        margin: 0;
+    }
+}
+
+.admin-actions {
+    margin-bottom: 32px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 16px;
+
+    .btn-secondary {
+        padding: 12px 24px;
+        background-color: white;
+        color: $primary-color;
+        border: 2px solid $primary-color;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+
+        &:hover {
+            background-color: $backgroung-secondary-gray;
+        }
+    }
+
+    .btn-primary {
+        padding: 12px 24px;
+        background-color: $primary-color;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+
+        &:hover:not(:disabled) {
+            background-color: #6B0000;
+        }
+
+        &:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+    }
+}
+
+.create-sale-form-container {
+    background-color: white;
+    border-radius: 8px;
+    padding: 32px;
+    margin-bottom: 32px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+
+    .form-title {
+        font-size: 24px;
+        font-weight: bold;
+        color: $primary-color;
+        margin-bottom: 24px;
+    }
+
+    .create-sale-form {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+
+            .form-label {
+                font-size: 14px;
+                font-weight: 500;
+                color: $text-color;
+                margin-bottom: 4px;
+            }
+
+            .form-select {
+                padding: 12px;
+                border: 2px solid $backgroung-gray;
+                border-radius: 8px;
+                font-size: 14px;
+                cursor: pointer;
+                transition: border-color 0.3s ease;
+                background-color: white;
+
+                &:hover {
+                    border-color: $primary-color;
+                }
+
+                &:focus {
+                    outline: none;
+                    border-color: $primary-color;
+                }
+            }
+
+            .add-item-form {
+                display: flex;
+                gap: 12px;
+                align-items: flex-end;
+
+                .form-select {
+                    flex: 2;
+                }
+
+                .form-input {
+                    flex: 1;
+                    padding: 12px;
+                    border: 2px solid $backgroung-gray;
+                    border-radius: 8px;
+                    font-size: 14px;
+                    transition: border-color 0.3s ease;
+
+                    &:focus {
+                        outline: none;
+                        border-color: $primary-color;
+                    }
+                }
+
+                .btn-add-item {
+                    padding: 12px 24px;
+                    background-color: $secundary-color;
+                    color: white;
+                    border: none;
+                    border-radius: 8px;
+                    font-size: 14px;
+                    font-weight: 500;
+                    cursor: pointer;
+                    transition: background-color 0.3s ease;
+
+                    &:hover {
+                        background-color: #C0442E;
+                    }
+                }
+            }
+        }
+
+        .sale-items-preview {
+            margin-top: 16px;
+
+            h3 {
+                font-size: 18px;
+                font-weight: 600;
+                color: $text-color;
+                margin-bottom: 16px;
+            }
+
+            .preview-table {
+                width: 100%;
+                border-collapse: collapse;
+
+                thead {
+                    background-color: $backgroung-gray;
+
+                    th {
+                        padding: 12px;
+                        text-align: left;
+                        font-weight: 600;
+                        font-size: 12px;
+                        text-transform: uppercase;
+                        color: $text-color;
+                    }
+                }
+
+                tbody {
+                    tr {
+                        border-bottom: 1px solid $backgroung-gray;
+
+                        &:last-child {
+                            border-bottom: none;
+                        }
+
+                        td {
+                            padding: 12px;
+                            font-size: 14px;
+                            color: $text-color;
+                        }
+                    }
+                }
+
+                tfoot {
+                    background-color: $backgroung-secondary-gray;
+
+                    td {
+                        padding: 12px;
+                        font-size: 14px;
+                        font-weight: 600;
+                        color: $text-color;
+                    }
+                }
+
+                .btn-remove-item {
+                    padding: 6px 12px;
+                    background-color: #dc3545;
+                    color: white;
+                    border: none;
+                    border-radius: 6px;
+                    font-size: 12px;
+                    font-weight: 500;
+                    cursor: pointer;
+                    transition: background-color 0.3s ease;
+
+                    &:hover {
+                        background-color: #c82333;
+                    }
+                }
+            }
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 16px;
+            justify-content: flex-end;
+            margin-top: 16px;
+
+            button {
+                padding: 12px 24px;
+                border-radius: 8px;
+                font-size: 16px;
+                font-weight: 500;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                border: none;
+
+                &.btn-primary {
+                    background-color: $primary-color;
+                    color: white;
+
+                    &:hover:not(:disabled) {
+                        background-color: #6B0000;
+                    }
+
+                    &:disabled {
+                        opacity: 0.6;
+                        cursor: not-allowed;
+                    }
+                }
+
+                &.btn-secondary {
+                    background-color: white;
+                    color: $primary-color;
+                    border: 2px solid $primary-color;
+
+                    &:hover {
+                        background-color: $backgroung-secondary-gray;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.sales-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 24px;
+    margin-bottom: 32px;
+
+    .stat-card {
+        background-color: white;
+        border-radius: 8px;
+        padding: 24px;
+        box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+        text-align: center;
+
+        h3 {
+            font-size: 14px;
+            color: $text-color;
+            margin: 0 0 12px 0;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .stat-value {
+            font-size: 28px;
+            font-weight: bold;
+            color: $primary-color;
+            margin: 0;
+        }
+    }
+}
+
+.filters-container {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+
+    .search-filter {
+        flex: 1;
+        min-width: 300px;
+
+        .search-input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid $backgroung-gray;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+
+            &:focus {
+                outline: none;
+                border-color: $primary-color;
+            }
+        }
+    }
+
+    .date-filter {
+        .filter-select {
+            padding: 12px 16px;
+            border: 2px solid $backgroung-gray;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: border-color 0.3s ease;
+            background-color: white;
+            min-width: 200px;
+
+            &:focus {
+                outline: none;
+                border-color: $primary-color;
+            }
+        }
+    }
+}
+
+.loading-container {
+    text-align: center;
+    padding: 60px 24px;
+    color: $text-color;
+    font-size: 18px;
+}
+
+.no-sales {
+    text-align: center;
+    padding: 60px 24px;
+    color: $text-color;
+    font-size: 18px;
+    background-color: white;
+    border-radius: 8px;
+}
+
+.sales-container {
+    .sales-list {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+
+        .sale-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 24px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+            &:hover {
+                transform: translateY(-2px);
+                box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.15);
+            }
+
+            .sale-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-start;
+                margin-bottom: 20px;
+                padding-bottom: 16px;
+                border-bottom: 2px solid $backgroung-gray;
+
+                .sale-info {
+                    h3 {
+                        font-size: 20px;
+                        font-weight: bold;
+                        color: $primary-color;
+                        margin: 0 0 8px 0;
+                    }
+
+                    .sale-date {
+                        font-size: 14px;
+                        color: $text-color;
+                        opacity: 0.7;
+                        margin: 0;
+                    }
+                }
+
+                .sale-total {
+                    text-align: right;
+
+                    .total-label {
+                        display: block;
+                        font-size: 12px;
+                        color: $text-color;
+                        opacity: 0.7;
+                        margin-bottom: 4px;
+                    }
+
+                    .total-value {
+                        display: block;
+                        font-size: 24px;
+                        font-weight: bold;
+                        color: $primary-color;
+                    }
+                }
+            }
+
+            .sale-details {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 20px;
+
+                .customer-info {
+                    p {
+                        margin: 4px 0;
+                        font-size: 14px;
+                        color: $text-color;
+
+                        strong {
+                            color: $primary-color;
+                        }
+                    }
+                }
+
+                .sale-status {
+                    .badge-success {
+                        display: inline-block;
+                        padding: 4px 12px;
+                        background-color: #28a745;
+                        color: white;
+                        border-radius: 12px;
+                        font-size: 12px;
+                        font-weight: 600;
+                        text-transform: uppercase;
+                    }
+
+                    .badge-warning {
+                        display: inline-block;
+                        padding: 4px 12px;
+                        background-color: #ffc107;
+                        color: #212529;
+                        border-radius: 12px;
+                        font-size: 12px;
+                        font-weight: 600;
+                        text-transform: uppercase;
+                    }
+
+                    .badge-danger {
+                        display: inline-block;
+                        padding: 4px 12px;
+                        background-color: #dc3545;
+                        color: white;
+                        border-radius: 12px;
+                        font-size: 12px;
+                        font-weight: 600;
+                        text-transform: uppercase;
+                    }
+
+                    .badge-default {
+                        display: inline-block;
+                        padding: 4px 12px;
+                        background-color: $backgroung-gray;
+                        color: $text-color;
+                        border-radius: 12px;
+                        font-size: 12px;
+                        font-weight: 600;
+                        text-transform: uppercase;
+                    }
+                }
+            }
+
+            .sale-items {
+                h4 {
+                    font-size: 16px;
+                    font-weight: 600;
+                    color: $text-color;
+                    margin: 0 0 12px 0;
+                }
+
+                .items-table {
+                    width: 100%;
+                    border-collapse: collapse;
+
+                    thead {
+                        background-color: $backgroung-gray;
+
+                        th {
+                            padding: 12px;
+                            text-align: left;
+                            font-weight: 600;
+                            font-size: 12px;
+                            text-transform: uppercase;
+                            color: $text-color;
+                        }
+                    }
+
+                    tbody {
+                        tr {
+                            border-bottom: 1px solid $backgroung-gray;
+
+                            &:last-child {
+                                border-bottom: none;
+                            }
+
+                            td {
+                                padding: 12px;
+                                font-size: 14px;
+                                color: $text-color;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .sale-actions {
+                display: flex;
+                gap: 12px;
+                justify-content: flex-end;
+                padding-top: 20px;
+                margin-top: 20px;
+                border-top: 2px solid $backgroung-gray;
+
+                button {
+                    padding: 10px 20px;
+                    border-radius: 6px;
+                    font-size: 14px;
+                    font-weight: 500;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                    border: none;
+
+                    &.btn-view-details {
+                        background-color: $secundary-color;
+                        color: white;
+
+                        &:hover {
+                            background-color: #C0442E;
+                        }
+                    }
+
+                    &.btn-delete {
+                        background-color: #dc3545;
+                        color: white;
+
+                        &:hover {
+                            background-color: #c82333;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .sales-management-page {
+        padding: 24px 16px 40px;
+    }
+
+    .page-header {
+        margin-bottom: 32px;
+
+        .page-title {
+            font-size: 28px;
+        }
+
+        .page-subtitle {
+            font-size: 16px;
+        }
+    }
+
+    .sales-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .filters-container {
+        flex-direction: column;
+
+        .search-filter {
+            min-width: 100%;
+        }
+    }
+
+    .sale-card {
+        .sale-header {
+            flex-direction: column;
+            gap: 16px;
+
+            .sale-total {
+                text-align: left;
+            }
+        }
+
+        .sale-details {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 12px;
+        }
+    }
+}
+
