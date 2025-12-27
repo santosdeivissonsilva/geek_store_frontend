@@ -1,0 +1,74 @@
+<app-default-homepage
+    user="Conta"
+    cart="Carrinho"
+    (navigateToUserPage)="navigateToUserPage()"
+    (navigateToProductsPage)="navigateToProductsPage()"
+    (navigateToCartPage)="navigateToCartPage()"
+>
+    <div class="my-purchases-page">
+        <div class="page-header">
+            <h1 class="page-title">Minhas Compras</h1>
+            <p class="page-subtitle">Visualize todas as suas compras realizadas</p>
+        </div>
+
+        @if (loading) {
+            <div class="loading-container">
+                <p>Carregando suas compras...</p>
+            </div>
+        }
+
+        @if (!loading) {
+            <div class="purchases-container">
+                @if (purchases.length === 0) {
+                    <div class="no-purchases">
+                        <h2>Você ainda não realizou nenhuma compra</h2>
+                        <p>Explore nossos produtos e faça sua primeira compra!</p>
+                        <button class="btn-primary" (click)="navigateToProductsPage()">
+                            Ver Produtos
+                        </button>
+                    </div>
+                }
+
+                @if (purchases.length > 0) {
+                    <div class="purchases-list">
+                        @for (purchase of purchases; track purchase.id) {
+                            <div class="purchase-card" (click)="navigateToPurchaseDetails(purchase.id)">
+                                <div class="purchase-header">
+                                    <div class="purchase-info">
+                                        <h3>Compra #{{ purchase.id.substring(0, 8) }}</h3>
+                                        <p class="purchase-date">{{ formatDate(purchase.date) }}</p>
+                                    </div>
+                                    <div class="purchase-total">
+                                        <span class="total-label">Total:</span>
+                                        <span class="total-value">{{ formatPrice(purchase.total) }}</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="purchase-details">
+                                    <div class="items-count">
+                                        <p><strong>{{ purchase.items?.length || 0 }}</strong> {{ (purchase.items?.length || 0) === 1 ? 'item' : 'itens' }}</p>
+                                    </div>
+                                    
+                                    @if (purchase.status) {
+                                        <div class="purchase-status">
+                                            <span [class]="getStatusBadgeClass(purchase.status)">
+                                                {{ purchase.status }}
+                                            </span>
+                                        </div>
+                                    }
+                                </div>
+
+                                <div class="purchase-actions">
+                                    <button class="btn-view-details" (click)="navigateToPurchaseDetails(purchase.id); $event.stopPropagation()">
+                                        Ver Detalhes
+                                    </button>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</app-default-homepage>
+

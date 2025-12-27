@@ -1,0 +1,250 @@
+@import "../../../styles/variables.scss";
+
+.my-purchases-page {
+    padding: 40px 24px 60px;
+    max-width: 1400px;
+    margin: 0 auto;
+    background-color: $background-color;
+    min-height: calc(100vh - 80px);
+}
+
+.page-header {
+    text-align: center;
+    margin-bottom: 40px;
+
+    .page-title {
+        font-size: 36px;
+        font-weight: bold;
+        color: $primary-color;
+        margin-bottom: 12px;
+    }
+
+    .page-subtitle {
+        font-size: 18px;
+        color: $text-color;
+        margin: 0;
+    }
+}
+
+.loading-container {
+    text-align: center;
+    padding: 60px 24px;
+    color: $text-color;
+    font-size: 18px;
+}
+
+.no-purchases {
+    text-align: center;
+    padding: 60px 24px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+
+    h2 {
+        font-size: 24px;
+        color: $text-color;
+        margin-bottom: 12px;
+    }
+
+    p {
+        font-size: 16px;
+        color: $text-color;
+        opacity: 0.7;
+        margin-bottom: 24px;
+    }
+
+    .btn-primary {
+        padding: 12px 24px;
+        background-color: $primary-color;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+            background-color: #6B0000;
+        }
+    }
+}
+
+.purchases-container {
+    .purchases-list {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+
+        .purchase-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 24px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            cursor: pointer;
+
+            &:hover {
+                transform: translateY(-2px);
+                box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.15);
+            }
+
+            .purchase-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-start;
+                margin-bottom: 20px;
+                padding-bottom: 16px;
+                border-bottom: 2px solid $backgroung-gray;
+
+                .purchase-info {
+                    h3 {
+                        font-size: 20px;
+                        font-weight: bold;
+                        color: $primary-color;
+                        margin: 0 0 8px 0;
+                    }
+
+                    .purchase-date {
+                        font-size: 14px;
+                        color: $text-color;
+                        opacity: 0.7;
+                        margin: 0;
+                    }
+                }
+
+                .purchase-total {
+                    text-align: right;
+
+                    .total-label {
+                        display: block;
+                        font-size: 12px;
+                        color: $text-color;
+                        opacity: 0.7;
+                        margin-bottom: 4px;
+                    }
+
+                    .total-value {
+                        display: block;
+                        font-size: 24px;
+                        font-weight: bold;
+                        color: $primary-color;
+                    }
+                }
+            }
+
+            .purchase-details {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 20px;
+
+                .items-count {
+                    p {
+                        margin: 0;
+                        font-size: 14px;
+                        color: $text-color;
+
+                        strong {
+                            color: $primary-color;
+                        }
+                    }
+                }
+
+                .purchase-status {
+                    .badge-success {
+                        display: inline-block;
+                        padding: 4px 12px;
+                        background-color: #28a745;
+                        color: white;
+                        border-radius: 12px;
+                        font-size: 12px;
+                        font-weight: 600;
+                        text-transform: uppercase;
+                    }
+
+                    .badge-warning {
+                        display: inline-block;
+                        padding: 4px 12px;
+                        background-color: #ffc107;
+                        color: #212529;
+                        border-radius: 12px;
+                        font-size: 12px;
+                        font-weight: 600;
+                        text-transform: uppercase;
+                    }
+
+                    .badge-danger {
+                        display: inline-block;
+                        padding: 4px 12px;
+                        background-color: #dc3545;
+                        color: white;
+                        border-radius: 12px;
+                        font-size: 12px;
+                        font-weight: 600;
+                        text-transform: uppercase;
+                    }
+
+                    .badge-default {
+                        display: inline-block;
+                        padding: 4px 12px;
+                        background-color: $backgroung-gray;
+                        color: $text-color;
+                        border-radius: 12px;
+                        font-size: 12px;
+                        font-weight: 600;
+                        text-transform: uppercase;
+                    }
+                }
+            }
+
+            .purchase-actions {
+                .btn-view-details {
+                    padding: 10px 20px;
+                    background-color: $primary-color;
+                    color: white;
+                    border: none;
+                    border-radius: 6px;
+                    font-size: 14px;
+                    font-weight: 500;
+                    cursor: pointer;
+                    transition: background-color 0.3s ease;
+
+                    &:hover {
+                        background-color: #6B0000;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .my-purchases-page {
+        padding: 24px 16px 40px;
+    }
+
+    .page-header {
+        margin-bottom: 32px;
+
+        .page-title {
+            font-size: 28px;
+        }
+
+        .page-subtitle {
+            font-size: 16px;
+        }
+    }
+
+    .purchase-card {
+        .purchase-header {
+            flex-direction: column;
+            gap: 16px;
+
+            .purchase-total {
+                text-align: left;
+            }
+        }
+    }
+}
+
